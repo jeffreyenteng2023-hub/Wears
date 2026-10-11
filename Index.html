@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chilso Jewelers</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Reset & Variables --- */
+        :root {
+            --primary-teal: #2a7f7f;
+            --dark-bg: #0f0f0f;
+            --text-dark: #1a1a1a;
+            --text-gray: #555555;
+            --text-light: #888888;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- Button Styles --- */
+        .btn {
+            display: inline-block;
+            padding: 10px 28px;
+            background-color: var(--primary-teal);
+            color: var(--white);
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { background-color: #1f5c5c; }
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-teal);
+            color: var(--primary-teal);
+        }
+        .btn-outline:hover { background-color: var(--primary-teal); color: var(--white); }
+
+        .section-title {
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+
+        /* --- Header --- */
+        header { background: var(--white); padding: 18px 0; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; z-index: 1000; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 32px; font-weight: 700; font-style: italic; color: var(--text-dark); letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 30px; font-size: 12px; text-transform: uppercase; font-weight: 500; letter-spacing: 1px; }
+        .nav-links a:hover { color: var(--primary-teal); }
+        .header-icons { display: flex; gap: 20px; align-items: center; font-size: 14px; }
+        .search-bar { display: flex; align-items: center; background: #f5f5f5; border-radius: 20px; padding: 6px 15px; }
+        .search-bar i { font-size: 12px; color: var(--text-light); }
+        .search-bar input { border: none; background: transparent; outline: none; font-size: 11px; padding: 0 10px; width: 130px; }
+
+        /* --- Hero Section --- */
+        .hero { background-color: var(--dark-bg); display: flex; align-items: center; height: 550px; position: relative; overflow: hidden; }
+        .hero-content { flex: 1; padding: 0 10% 0 15%; z-index: 2; color: var(--white); }
+        .hero-content h1 { font-family: var(--font-heading); font-size: 46px; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+        .hero-content p { font-size: 12px; color: #b0b0b0; margin-bottom: 35px; max-width: 350px; }
+        .hero-image { flex: 1; height: 100%; position: relative; }
+        /* The mask creates the fade effect from black to the image */
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: top; mask-image: linear-gradient(to right, transparent, black 30%); -webkit-mask-image: linear-gradient(to right, transparent, black 30%); }
+
+        /* --- Our Products --- */
+        .products { padding: 90px 0; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        .product-card { background: var(--white); border: 1px solid #f0f0f0; border-radius: 6px; padding: 30px 20px; text-align: center; transition: all 0.3s; }
+        .product-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        /* Pure CSS replacement for the icons to ensure it loads perfectly */
+        .product-icon { height: 90px; width: 90px; margin: 0 auto 20px; background: #f2f8f8; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #e0eded; font-size: 35px; }
+        
+        .product-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+        .product-card p { font-size: 11px; color: var(--text-light); margin-bottom: 20px; }
+        .product-card .btn { padding: 8px 20px; font-size: 9px; }
+
+        /* --- About Section --- */
+        .about { padding: 80px 0 100px; display: flex; align-items: center; gap: 60px; }
+        .about-img { flex: 1; position: relative; padding-bottom: 40px; padding-right: 40px; }
+        .about-img img { width: 100%; border-radius: 6px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); position: relative; z-index: 2; }
+        .about-img::after { content: ''; position: absolute; bottom: 0; right: 0; width: 180px; height: 180px; border: 2px solid var(--primary-teal); border-radius: 6px; z-index: 1; }
+        .about-text { flex: 1; }
+        .about-text h2 { font-family: var(--font-heading); font-size: 26px; text-transform: uppercase; margin-bottom: 25px; }
+        .about-text p { font-size: 12px; color: var(--text-gray); margin-bottom: 20px; text-align: justify; }
+
+        /* --- Best Seller --- */
+        .best-seller { background-color: var(--primary-teal); padding: 90px 0; color: var(--white); }
+        .best-seller .section-title { color: var(--white); }
+        .seller-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        .seller-card { background: var(--white); border-radius: 6px; overflow: hidden; color: var(--text-dark); }
+        .seller-card img { width: 100%; height: 220px; object-fit: cover; }
+        .seller-info { padding: 20px; text-align: center; }
+        .seller-info h4 { font-size: 13px; margin-bottom: 8px; text-transform: uppercase; }
+        .seller-info p { font-size: 12px; color: var(--primary-teal); font-weight: 600; }
+
+        /* --- Why Choose Us --- */
+        .why-choose { padding: 100px 0; display: flex; align-items: center; gap: 60px; }
+        .why-text { flex: 1; }
+        .why-text h2 { font-family: var(--font-heading); font-size: 26px; text-transform: uppercase; margin-bottom: 25px; }
+        .why-text p { font-size: 12px; color: var(--text-gray); margin-bottom: 25px; text-align: justify; }
+        .why-img { flex: 1; background-color: #d4ecec; border-radius: 6px; height: 400px; overflow: hidden; }
+        .why-img img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
+
+        /* --- Testimonials --- */
+        .testimonials { padding: 90px 0; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .testimonial-card { background: var(--white); border: 1px solid #eaeaea; border-radius: 30px 30px 30px 0; padding: 40px 30px 30px; position: relative; display: flex; gap: 25px; }
+        .testimonial-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; position: absolute; top: -30px; left: 30px; border: 3px solid #fff; }
+        .testimonial-content { margin-top: 25px; }
+        .testimonial-content h4 { font-size: 14px; margin-bottom: 5px; }
+        .stars { color: #f5c542; font-size: 11px; margin-bottom: 15px; }
+        .testimonial-content p { font-size: 11px; color: var(--text-gray); }
+
+        /* --- Gallery --- */
+        .gallery { padding: 90px 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 220px); gap: 15px; }
+        .gallery-item { border-radius: 6px; overflow: hidden; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+        .gallery-item:hover img { transform: scale(1.08); }
+        
+        .gallery-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 2; }
+        .gallery-item:nth-child(2) { grid-column: 3 / 4; grid-row: 1 / 2; }
+        .gallery-item:nth-child(3) { grid-column: 4 / 5; grid-row: 1 / 2; }
+        .gallery-item:nth-child(4) { grid-column: 1 / 2; grid-row: 2 / 3; }
+        .gallery-item:nth-child(5) { grid-column: 2 / 4; grid-row: 2 / 3; }
+        .gallery-item:nth-child(6) { grid-column: 4 / 5; grid-row: 2 / 3; }
+
+        /* --- Newsletter --- */
+        .newsletter { background-color: var(--primary-teal); padding: 70px 0; color: var(--white); text-align: center; }
+        .newsletter h2 { font-family: var(--font-heading); font-size: 28px; text-transform: uppercase; margin-bottom: 15px; }
+        .newsletter p { font-size: 12px; margin-bottom: 35px; color: #d4ecec; }
+        .newsletter-form { display: flex; justify-content: center; max-width: 600px; margin: 0 auto; background: var(--white); border-radius: 30px; padding: 6px; }
+        .newsletter-form input { flex: 1; border: none; outline: none; padding: 12px 25px; border-radius: 30px; font-size: 12px; }
+
+        /* --- Footer --- */
+        footer { background-color: var(--white); padding: 80px 0 30px; border-top: 1px solid #f0f0f0; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 60px; }
+        .footer-logo h2 { font-family: var(--font-heading); font-size: 36px; font-style: italic; margin-bottom: 20px; }
+        .footer-col h3 { font-size: 13px; text-transform: uppercase; margin-bottom: 25px; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul a { font-size: 11px; color: var(--text-gray); transition: 0.3s; }
+        .footer-col ul a:hover { color: var(--primary-teal); }
+        .contact-info li { display: flex; gap: 15px; font-size: 11px; color: var(--text-gray); margin-bottom: 18px; }
+        .contact-info i { color: var(--primary-teal); font-size: 13px; margin-top: 3px; }
+        .footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid #f0f0f0; font-size: 11px; color: var(--text-light); }
+
+        /* --- Mobile Responsive Adjustments --- */
+        @media (max-width: 1024px) {
+            .product-grid, .seller-grid { grid-template-columns: repeat(2, 1fr); }
+            .about, .why-choose { flex-direction: column; gap: 40px; }
+            .about-img { padding-right: 0; padding-bottom: 0; }
+            .about-img::after { display: none; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-content { padding: 0 5%; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .search-bar { display: none; }
+            .hero { flex-direction: column; height: auto; }
+            .hero-content { padding: 60px 20px; text-align: center; }
+            .hero-image { height: 350px; width: 100%; }
+            .hero-image img { mask-image: none; -webkit-mask-image: none; }
+            .testimonial-grid { grid-template-columns: 1fr; gap: 60px; }
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .gallery-item:nth-child(n) { grid-column: auto; grid-row: auto; height: 250px; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .contact-info li { justify-content: center; }
+            .newsletter-form { flex-direction: column; background: transparent; gap: 15px; }
+            .newsletter-form input { border-radius: 30px; }
+            .testimonial-avatar { left: 50%; transform: translateX(-50%); }
+            .testimonial-card { padding-top: 60px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <div class="logo">Chilson</div>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Shop</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+            <div class="header-icons">
+                <div class="search-bar">
+                    <span>🔍</span>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <span>🛒</span>
+                <span>👤</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome To<br>Chilso Jewelers</h1>
+            <p>Discover our exquisite collection of handcrafted jewelry, designed to make every moment unforgettable.</p>
+            <a href="#" class="btn">Shop Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1599643477874-5c866c7a31d5?q=80&w=1000&auto=format&fit=crop" alt="Elegant Woman Wearing Jewelry">
+        </div>
+    </section>
+
+    <section class="products container">
+        <h2 class="section-title">Our Product</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-icon">💎</div>
+                <h3>Quick Shop</h3>
+                <p>Explore our fast-selling daily wear pieces.</p>
+                <a href="#" class="btn btn-outline">View More</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">💍</div>
+                <h3>Wedding Shop</h3>
+                <p>Find the perfect symbol of your eternal love.</p>
+                <a href="#" class="btn btn-outline">View More</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">👑</div>
+                <h3>Precious Shop</h3>
+                <p>Indulge in our rare and precious gemstones.</p>
+                <a href="#" class="btn btn-outline">View More</a>
+            </div>
+            <div class="product-card">
+                <div class="product-icon">💎</div>
+                <h3>Ear Rings</h3>
+                <p>Stunning earrings for every occasion.</p>
+                <a href="#" class="btn btn-outline">View More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about container">
+        <div class="about-img">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=800&auto=format&fit=crop" alt="Jewelry Crafting">
+        </div>
+        <div class="about-text">
+            <h2>About Chilso Jewelers</h2>
+            <p>Welcome to Chilso Jewelers, where passion meets craftsmanship. For over three decades, we have been dedicated to creating timeless pieces that celebrate life's most precious moments. Our master artisans blend traditional techniques with modern design, ensuring every piece tells a unique story.</p>
+            <p>We source only the finest ethically mined diamonds and precious metals, guaranteeing both beauty and integrity in every creation. Whether you're marking an engagement, an anniversary, or simply treating yourself, Chilso Jewelers is here to make it extraordinary.</p>
+            <a href="#" class="btn">Read More</a>
+        </div>
+    </section>
+
+    <section class="best-seller">
+        <div class="container">
+            <h2 class="section-title">Best Seller</h2>
+            <div class="seller-grid">
+                <div class="seller-card">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?q=80&w=500&auto=format&fit=crop" alt="Necklace">
+                    <div class="seller-info"><h4>Lorium Ipsum</h4><p>$450.00</p></div>
+                </div>
+                <div class="seller-card">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=500&auto=format&fit=crop" alt="Earrings">
+                    <div class="seller-info"><h4>Lorem Ipsum</h4><p>$320.00</p></div>
+                </div>
+                <div class="seller-card">
+                    <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=500&auto=format&fit=crop" alt="Ring">
+                    <div class="seller-info"><h4>Lorium Ipsum</h4><p>$890.00</p></div>
+                </div>
+                <div class="seller-card">
+                    <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=500&auto=format&fit=crop" alt="Bracelet">
+                    <div class="seller-info"><h4>Lorem Ipsum</h4><p>$550.00</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose container">
+        <div class="why-text">
+            <h2>Why Choose Us</h2>
+            <p>Choosing Chilso Jewelers means choosing unparalleled quality and service. We stand behind every piece we create, offering a lifetime warranty on all our fine jewelry. Our commitment to ethical sourcing ensures that your purchase is not only beautiful but also responsible.</p>
+            <p>Furthermore, our dedicated customer service team is here to guide you through every step of your journey, from selecting the perfect engagement ring to finding the ideal anniversary gift. Experience the Chilso difference today.</p>
+            <a href="#" class="btn">Discover More</a>
+        </div>
+        <div class="why-img">
+            <img src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=800&auto=format&fit=crop" alt="Woman wearing necklace">
+        </div>
+    </section>
+
+    <section class="testimonials container">
+        <h2 class="section-title">Our Clients Testimonial</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Client" class="testimonial-avatar">
+                <div class="testimonial-content">
+                    <h4>Jessica Tamar</h4>
+                    <div class="stars">★★★★★</div>
+                    <p>"I absolutely adore my engagement ring from Chilso. The craftsmanship is exquisite and the customer service was top-notch. Highly recommend!"</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&auto=format&fit=crop" alt="Client" class="testimonial-avatar">
+                <div class="testimonial-content">
+                    <h4>Amelia Watson</h4>
+                    <div class="stars">★★★★★</div>
+                    <p>"The attention to detail is remarkable. I purchased a necklace for my anniversary and it exceeded all my expectations. Beautiful work!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery container">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1531995811006-35cb42e1a022?q=80&w=800&auto=format&fit=crop" alt="Gallery"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?q=80&w=400&auto=format&fit=crop" alt="Gallery"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-15969449246
+                                            <!-- GALLERY SECTION -->
+    <section class="gallery container">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            <!-- Exact grid mapping matching the screenshot -->
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1531995811006-35cb42e1a022?q=80&w=800&auto=format&fit=crop" alt="Gallery Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?q=80&w=400&auto=format&fit=crop" alt="Gallery Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?q=80&w=400&auto=format&fit=crop" alt="Gallery Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1629224316810-9d8805b95e76?q=80&w=400&auto=format&fit=crop" alt="Gallery Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1584302179602-e4c3d3fd629d?q=80&w=800&auto=format&fit=crop" alt="Gallery Image">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1610189012906-3b1d2f69d39c?q=80&w=400&auto=format&fit=crop" alt="Gallery Image">
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Join Us Our Newsletter</h2>
+            <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-logo">
+                <h2>Chilson</h2>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Link</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Important</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>My Account</h3>
+                <ul>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Order History</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                </ul>
+            </div>
+            <div class="footer-col contact-info">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><span>📍</span> 123 Jewelry Lane, Diamond District, NY 10001</li>
+                    <li><span>📞</span> +1 (555) 123-4567</li>
+                    <li><span>✉️</span> info@chilsojewelers.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Chilso Jewelers. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+            </html>
